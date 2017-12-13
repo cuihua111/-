@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="informationDetails">
   <el-breadcrumb separator="/">
     <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>个人资料</el-breadcrumb-item>
@@ -11,8 +11,8 @@
     <li>绑定手机号码: <span v-text="phoneBind"></span></li>
     <li>绑定邮箱: <span v-text='memberEmail'></span></li>
   </ul>
+  <h3>交易密码修改</h3>
   <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="80px" class="ruleForm">
-    <h3>交易密码修改</h3>
     <el-form-item label="初始密码" prop="pass">
       <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
     </el-form-item>
@@ -116,6 +116,8 @@
   }
   .ruleForm {
     width:460px;
+  }
+  .informationDetails {
     h3 {
       font-size:16px;
       font-weight:700;
@@ -126,7 +128,7 @@
   }
   ul {
     li {
-      margin:15px 0;
+      margin:25px 0;
     }
   }
 </style>

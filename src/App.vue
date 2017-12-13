@@ -1,37 +1,27 @@
 <template>
   <div id="app">
-    <Mheader></Mheader>
-    <personalInformation class="personalInformation"></personalInformation>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import Mheader from "components/common/header"
-  import personalInformation from "components/common/personalInformation"
-export default {
-  name: 'app',
-  data () {
-    return {
 
-    }
-  },
-  created () {
-
-  },
-  methods: {
-
-  },
-  components: {
-    Mheader,
-    personalInformation
+  export default {
+    name: 'app',
   }
-}
 </script>
 
-<style lang="scss" type=text/scss scope>
-  .personalInformation {
-    margin-left: 30px;
-    position: fixed;
-    top:135px;
+<style lang="scss" type=text/scss  scope>
+  #app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    .personalInformation {
+      margin-left: 30px;
+      position: fixed;
+      top: 110px;
+    }
   }
 </style>
