@@ -2,19 +2,15 @@
   <div>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>提现</el-breadcrumb-item>
+      <el-breadcrumb-item>TK币交易</el-breadcrumb-item>
     </el-breadcrumb>
     <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="ruleForm">
       <p>会员ID: <span v-text="memberId"></span></p>
-      <p>跨港宝: <span v-text="kgb"></span></p>
-      <h3>提现信息</h3>
-      <el-form-item label="提现银行" prop="pass">
+      <p>TK币数量: <span v-text="TK"></span></p>
+      <el-form-item label="转账到会员ID" prop="pass">
         <el-input label-width="400px" type="text" v-model="ruleForm2.pass" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item label="提现人姓名" prop="checkPass">
-        <el-input label-width="400px"  type="text" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="提现金额" prop="date">
+      <el-form-item label="转账TK币数量" prop="date">
         <el-input label-width="400px"  type="text" v-model="ruleForm2.date" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="实际到账金额" prop="money">
@@ -78,7 +74,7 @@
         },
         radio:1,
         memberId:'sadasda',
-        kgb:1000
+        TK:1000
       };
     },
     methods: {
@@ -98,7 +94,7 @@
     }
   }
 </script>
-<style lang=scss  type=text/scss  scope>
+<style lang=scss type=text/scss scope>
   .el-breadcrumb {
     border-bottom: 1px solid #d5d5d5;
     font-size:14px;

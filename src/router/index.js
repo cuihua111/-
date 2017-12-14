@@ -12,14 +12,15 @@ import login from 'components/login/login'
 import homepage from 'components/homepage/homepage'
 import register from 'components/register/register'
 import forgetPasswordSingle from 'components/forgetPassword/forgetPassword'
+import TKTransaction from 'components/TKTransaction/TKTransaction'
 
 export default new Router({
   mode: 'history',
   routes: [
     {
       path: '/',
-      redirect: '/home',
-      component: home
+      redirect: '/homepage',
+      component: homepage
     },
     {
       path: '/home',
@@ -55,6 +56,11 @@ export default new Router({
           path: '/homepage',
           name: 'homepage',
           component: homepage
+        },
+        {
+          path: '/TKTransaction',
+          name: 'TKTransaction',
+          component: TKTransaction
         }
       ]
     },

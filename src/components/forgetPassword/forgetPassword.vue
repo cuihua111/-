@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item label="绑定手机号码">
        <span v-text=phoneBind></span>
-        <el-button style="margin-left: 15px;" type="primary">点击获取验证码</el-button>
+        <el-button style="float: right;" type="primary">点击获取验证码</el-button>
       </el-form-item>
       <el-form-item label="验证码" prop="yzCode">
         <el-input type="password" v-model="ruleForm2.yzCode" auto-complete="off"></el-input>
@@ -79,7 +79,7 @@
           ]
         },
         userId:1312313,
-        phoneBind:'18244979393'
+        phoneBind:''
       }
     },
     methods: {

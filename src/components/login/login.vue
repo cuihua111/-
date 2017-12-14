@@ -25,6 +25,8 @@
   </div>
 </template>
 <script>
+  import {apiHost} from 'common/js/host.js'
+
   export default {
     data() {
       var validatePass = (rule, value, callback) => {
@@ -40,7 +42,7 @@
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入用户ID'));
-        }  else {
+        } else {
           callback();
         }
       };
@@ -62,26 +64,39 @@
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
-//          if (valid) {
-//            alert('submit!');
-//          } else {
-//            console.log('error submit!!');
-//            return false;
-//          }
-          this.$router.push({path: '/home'})
+          if (valid) {
+            const url = `${apiHost}/user/login`
+            let _this = this
+            var params = new URLSearchParams()
+            let crypto = require('crypto.js')
+            params.append('userName', '' + _this.ruleForm2.userId + '')
+            params.append('pwd', '' + crypto.md5(_this.ruleForm2.pass) + '')
+            this.$http.post(url, params).then((res) => {
+              console.log(res)
+              if (res.data.code == 0) {
+                this.$router.push({path: '/home'})
+              }
+              if (res.data.code == 1) {
+                this.$message.error(res.data.msg)
+              }
+            })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
         });
       }
     }
   }
 </script>
-<style lang="scss" type=text/scss  scope>
+<style lang="scss" type=text/scss   scope>
   .login {
     width: 500px;
     height: 400px;
     border: 1px solid #d9d9d9;
     position: absolute;
-    top:100px;
-    left:50%;
+    top: 100px;
+    left: 50%;
     transform: translateX(-50%);
     .title {
       height: 50px;
@@ -94,16 +109,16 @@
       .toRegister {
         position: absolute;
         right: 20px;
-        top:0px;
+        top: 0px;
         a {
           font-size: 14px;
-          color:#000;
+          color: #000;
         }
       }
     }
     .ruleForm {
-    width:350px;
-    margin: 80px auto 0 auto;
+      width: 350px;
+      margin: 80px auto 0 auto;
       .btnBox {
         .el-form-item__content {
           text-align: center;

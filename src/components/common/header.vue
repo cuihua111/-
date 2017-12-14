@@ -12,7 +12,7 @@
         <!--<el-menu-item index="3"><a href="" target="_blank">订单管理</a></el-menu-item>-->
         <el-menu-item index="/recommend">我的推荐</el-menu-item>
         <el-menu-item index="3">推荐拓扑图</el-menu-item>
-        <el-menu-item index="4">TK币交易</el-menu-item>
+        <el-menu-item index="/TKTransaction">TK币交易</el-menu-item>
         <el-submenu index="6">
           <template slot="title">财务明细</template>
           <el-menu-item index="6-1">选项1</el-menu-item>
