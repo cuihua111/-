@@ -6,13 +6,18 @@
     </el-breadcrumb>
     <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="ruleForm">
       <h3>收款信息</h3>
-      <el-form-item label="收款账户">
-        <el-radio-group v-model="radio">
+      <el-form-item label="支付方式">
+        <el-radio-group v-model="radio" @change="setRechargeType(radio)">
           <el-radio label="银行卡"></el-radio>
           <el-radio label="支付宝"></el-radio>
         </el-radio-group>
       </el-form-item>
-
+      <el-form-item v-if="this.radio=='银行卡'" label="银行卡号" prop="pass">
+        <el-input label-width="400px" type="text" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item v-if="this.radio=='支付宝'" label="支付宝账号" prop="pass">
+        <el-input label-width="400px" type="text" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+      </el-form-item>
       <h3>汇款信息</h3>
       <el-form-item label="汇款银行" prop="pass">
         <el-input label-width="400px" type="text" v-model="ruleForm2.pass" auto-complete="off"></el-input>
@@ -25,6 +30,9 @@
       </el-form-item>
       <el-form-item label="汇款金额" prop="money">
         <el-input label-width="400px"  v-model.number="ruleForm2.money"></el-input>
+      </el-form-item>
+      <el-form-item prop="money">
+        <span>充值成功后，直接显示在SK币中</span>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
@@ -82,7 +90,8 @@
             {validator: dateChoice, trigger: 'blur'}
           ]
         },
-        radio:1
+        radio:"",
+        rechargeType:0
       };
     },
     methods: {
@@ -98,6 +107,13 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      setRechargeType(value){
+        if(value=='银行卡'){
+          this.rechargeType=1
+        }else{
+          this.rechargeType=2
+        }
       }
     }
   }

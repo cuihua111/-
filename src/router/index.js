@@ -13,6 +13,12 @@ import homepage from 'components/homepage/homepage'
 import register from 'components/register/register'
 import forgetPasswordSingle from 'components/forgetPassword/forgetPassword'
 import TKTransaction from 'components/TKTransaction/TKTransaction'
+import rechargeDetial from 'components/financialManagement/rechargeDetial'
+import withdrawalsDetial from 'components/financialManagement/withdrawalsDetial'
+import staticIncomeDetial from 'components/financialManagement/staticIncomeDetial'
+import dynamicIncomeDetial from 'components/financialManagement/dynamicIncomeDetial'
+import CurrencyREDetial from 'components/financialManagement/CurrencyREDetial'
+import profitTotal from 'components/financialManagement/profitTotal'
 
 export default new Router({
   mode: 'history',
@@ -61,6 +67,35 @@ export default new Router({
           path: '/TKTransaction',
           name: 'TKTransaction',
           component: TKTransaction
+        },
+        {
+          path: '/rechargeDetial',
+          name: 'rechargeDetial',
+          component: rechargeDetial
+        },
+        {
+          path: '/withdrawalsDetial',
+          name: 'withdrawalsDetial',
+          component: withdrawalsDetial
+        },
+        {
+          path: '/staticIncomeDetial',
+          name: 'staticIncomeDetial',
+          component: staticIncomeDetial
+        },
+        {
+          path: '/dynamicIncomeDetial',
+          name: 'dynamicIncomeDetial',
+          component: dynamicIncomeDetial
+        },
+        {
+          path: '/CurrencyREDetial',
+          name: 'CurrencyREDetial',
+          component: CurrencyREDetial
+        },{
+          path: '/profitTotal',
+          name: 'profitTotal',
+          component: profitTotal
         }
       ]
     },

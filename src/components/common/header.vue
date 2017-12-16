@@ -2,7 +2,7 @@
   <el-container>
     <el-header>
       <el-menu :default-active="this.$route.path" class="el-menu-demo" router mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-        <h3>尊敬的会员xxx,欢迎加入xxx</h3>
+        <h3>尊敬的会员xxx,欢迎加入跨港宝</h3>
         <el-menu-item index="/homepage">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">个人资料</template>
@@ -15,9 +15,12 @@
         <el-menu-item index="/TKTransaction">TK币交易</el-menu-item>
         <el-submenu index="6">
           <template slot="title">财务明细</template>
-          <el-menu-item index="6-1">选项1</el-menu-item>
-          <el-menu-item index="6-2">选项2</el-menu-item>
-          <el-menu-item index="6-3">选项3</el-menu-item>
+          <el-menu-item index="rechargeDetial">充值明细</el-menu-item>
+          <el-menu-item index="withdrawalsDetial">提现明细</el-menu-item>
+          <el-menu-item index="profitTotal">收益总明细</el-menu-item>
+          <el-menu-item index="staticIncomeDetial">静态收益明细</el-menu-item>
+          <el-menu-item index="dynamicIncomeDetial">动态收益明细</el-menu-item>
+          <el-menu-item index="CurrencyREDetial">币种收支明细</el-menu-item>
         </el-submenu>
         <el-button type="danger">退出</el-button>
       </el-menu>

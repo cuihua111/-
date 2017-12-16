@@ -1,7 +1,7 @@
 <template>
 <div class="informationDetails">
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ path: '/homepage' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>个人资料</el-breadcrumb-item>
     <el-breadcrumb-item>资料详情</el-breadcrumb-item>
   </el-breadcrumb>

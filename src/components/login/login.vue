@@ -74,7 +74,7 @@
             this.$http.post(url, params).then((res) => {
               console.log(res)
               if (res.data.code == 0) {
-                this.$router.push({path: '/home'})
+                this.$router.push({path: '/homepage'})
               }
               if (res.data.code == 1) {
                 this.$message.error(res.data.msg)
