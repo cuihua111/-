@@ -22,7 +22,7 @@
           <el-menu-item index="dynamicIncomeDetial">动态收益明细</el-menu-item>
           <el-menu-item index="CurrencyREDetial">币种收支明细</el-menu-item>
         </el-submenu>
-        <el-button type="danger">退出</el-button>
+        <el-button type="danger" @click="logout">退出</el-button>
       </el-menu>
     </el-header>
   </el-container>
@@ -39,12 +39,26 @@
       handleSelect(key, keyPath) {
 //        console.log(key, keyPath);
         console.log(this.$route.path)
+      },
+      logout(){
+        this.$confirm('确定退出登录？','提示',{
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(()=>{
+          //确定按钮
+          this.$message.success('点击了确定按钮')
+        }).catch(()=>{
+          //取消按钮
+          this.$message.error('点击了取消按钮')
+        })
       }
     }
   }
 </script>
 <style lang="scss" type=text/scss>
   .el-header {
+    height:70px;
     padding: 0;
     h3 {
       float: left;
@@ -62,5 +76,17 @@
   }
   .el-submenu {
     margin: 0;
+  }
+  .el-menu--horizontal .el-menu-item {
+    height:70px;
+    line-height: 70px;
+  }
+  .el-submenu {
+    height: 70px;
+    line-height: 70px;
+  }
+  .el-menu--horizontal .el-submenu .el-submenu__title {
+    height: 70px;
+    line-height: 70px;
   }
 </style>

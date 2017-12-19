@@ -80,3 +80,6 @@ body
 .el-main {
   height: 750px;
 }
+.el-breadcrumb__item span,.el-breadcrumb__item:last-child .el-breadcrumb__inner{
+  color: white !important;
+}

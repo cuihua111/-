@@ -6,32 +6,32 @@
     </el-breadcrumb>
     <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="ruleForm">
       <h3>收款信息</h3>
-      <el-form-item label="支付方式">
-        <el-radio-group v-model="radio" @change="setRechargeType(radio)">
-          <el-radio label="银行卡"></el-radio>
-          <el-radio label="支付宝"></el-radio>
+      <el-form-item label="收款账户">
+        <el-radio-group v-model="radio">
+            <el-radio @change="setRechargeType(item.id,item.type,item.cardNum)" v-for="item in rechargeMode" :key="item.id" :label="item.bankName+item.cardNum"></el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item v-if="this.radio=='银行卡'" label="银行卡号" prop="pass">
-        <el-input label-width="400px" type="text" v-model="ruleForm2.pass" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item v-if="this.radio=='支付宝'" label="支付宝账号" prop="pass">
-        <el-input label-width="400px" type="text" v-model="ruleForm2.pass" auto-complete="off"></el-input>
-      </el-form-item>
       <h3>汇款信息</h3>
-      <el-form-item label="汇款银行" prop="pass">
-        <el-input label-width="400px" type="text" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+      <el-form-item label="汇款银行" prop="remittanceBank">
+        <el-input label-width="400px" type="text" placeholder="中国工商银行海岸城支行" v-model="ruleForm2.remittanceBank" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item label="汇款人" prop="checkPass">
-        <el-input label-width="400px"  type="text" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+      <el-form-item label="汇款人" prop="remittancePerson">
+        <el-input label-width="400px" type="text" placeholder="张三" v-model="ruleForm2.remittancePerson" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="汇款日期" prop="date">
-        <el-input label-width="400px"  type="text" v-model="ruleForm2.date" auto-complete="off"></el-input>
+        <!--<el-input label-width="400px" type="text" v-model="ruleForm2.date" auto-complete="off"></el-input>-->
+        <el-date-picker
+          v-model="ruleForm2.date"
+          type="datetime"
+          placeholder="选择日期时间"
+          @change="changeTime"
+        >
+        </el-date-picker>
       </el-form-item>
       <el-form-item label="汇款金额" prop="money">
-        <el-input label-width="400px"  v-model.number="ruleForm2.money"></el-input>
+        <el-input label-width="400px" v-model.number="ruleForm2.money"></el-input>
       </el-form-item>
-      <el-form-item prop="money">
+      <el-form-item>
         <span>充值成功后，直接显示在SK币中</span>
       </el-form-item>
       <el-form-item>
@@ -42,8 +42,11 @@
   </div>
 </template>
 <script>
+  import {apiHost} from 'common/js/host.js'
+
   export default {
     data() {
+      let _this=this
       var checkMoney = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('请输入汇款金额'));
@@ -51,36 +54,47 @@
         setTimeout(() => {
           if (!Number.isInteger(value)) {
             callback(new Error('请输入正确汇款金额'));
+          }else{
+            callback()
           }
         }, 500);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入汇款银行'));
+        }else{
+          callback()
         }
       };
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入汇款人'));
+        }else{
+          callback()
         }
       };
-      var dateChoice = (rule, value, callback)=> {
-        if (value === '') {
+      var dateChoice = (rule, value, callback) => {
+        if (_this.ruleForm2.date === 'Invalid date') {
           callback(new Error('请输入汇款日期'));
+        }else{
+          callback()
         }
       };
       return {
         ruleForm2: {
-          pass: '',
-          checkPass: '',
+          remittanceBank: '',
+          remittancePerson: '',
           money: '',
-          date:''
+          date: '',
+          rechargeType: 1,
+          bankId:'',
+          cardNum:''
         },
         rules2: {
-          pass: [
+          remittanceBank: [
             {validator: validatePass, trigger: 'blur'}
           ],
-          checkPass: [
+          remittancePerson: [
             {validator: validatePass2, trigger: 'blur'}
           ],
           money: [
@@ -90,17 +104,35 @@
             {validator: dateChoice, trigger: 'blur'}
           ]
         },
-        radio:"",
-        rechargeType:0
+        rechargeMode: [],
+        radio: "",
       };
+    },
+    created() {
+      this.getCompanyAccount()
     },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            const url=`${apiHost}/user/rechange`
+            let params =new URLSearchParams()
+            params.append('type',''+this.ruleForm2.rechargeType+'')
+            params.append('cashBank',''+this.ruleForm2.cardNum+'')
+            params.append('cashId',''+this.ruleForm2.bankId+'')
+            params.append('remittanceBank',''+this.ruleForm2.remittanceBank+'')
+            params.append('remittanceUser',''+this.ruleForm2.remittancePerson+'')
+            params.append('remittanceTime',''+this.ruleForm2.date+'')
+            params.append('remittanceMoney',''+this.ruleForm2.money+'')
+            this.$http.post(url,params).then((res)=>{
+              console.log(res)
+              if(res.data.code==0){
+                this.$message.success('充值成功')
+              }else{
+                this.$message.error('充值失败')
+              }
+            })
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -108,28 +140,44 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-      setRechargeType(value){
-        if(value=='银行卡'){
-          this.rechargeType=1
-        }else{
-          this.rechargeType=2
-        }
+      setRechargeType(setId,setType,cardNum) {
+        this.ruleForm2.bankId=setId
+        this.ruleForm2.rechargeType=setType
+        this.ruleForm2.cardNum=cardNum
+//        console.log(setId,setType,cardNum)
+      },
+      getCompanyAccount() {
+        const url = `${apiHost}/user/paltform-account-ifno`
+        this.$http.get(url).then((res) => {
+          console.log(res)
+          this.rechargeMode = res.data.data
+          this.radio=res.data.data[0].bankName+res.data.data[0].cardNum
+          this.ruleForm2.bankId=res.data.data[0].id
+          this.ruleForm2.cardNum=res.data.data[0].cardNum
+        })
+      },
+      changeTime(val){
+        let moment = require('moment');
+        let timeEnd=moment(val).format('YYYY-MM-DD HH:mm:ss')
+        this.ruleForm2.date=timeEnd
+        console.log(timeEnd)
       }
     }
   }
 </script>
-<style lang=scss  type=text/scss  scope>
+<style lang=scss    type=text/scss    scope>
   .el-breadcrumb {
     border-bottom: 1px solid #d5d5d5;
-    font-size:14px;
-    padding-bottom:8px;
+    font-size: 14px;
+    padding-bottom: 8px;
   }
-.ruleForm {
-  h3 {
-    font-size:16px;
-    font-weight:700;
-    margin: 20px 0;
+
+  .ruleForm {
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+    width: 460px;
   }
-  width:460px;
-}
 </style>

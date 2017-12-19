@@ -18,6 +18,7 @@
     position: relative;
     top: 0;
     left: 0;
+    background-image: url('./common/img/bg.png');
     .personalInformation {
       margin-left: 30px;
       position: fixed;

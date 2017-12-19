@@ -246,7 +246,7 @@
     }
   }
 </script>
-<style lang="scss" type=text/scss    scope>
+<style lang="scss" type=text/scss    scoped>
   .registerBox {
     width: 600px;
     padding-bottom: 50px;

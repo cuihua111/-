@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Mheader></Mheader>
+  <div class="root">
+    <Mheader class="rootHeader"></Mheader>
     <personalInformation class="personalInformation"></personalInformation>
-    <router-view v-loading="loading" style="position: absolute;top:110px;left: 385px;" :style="'width:' + bodyWidth + '%'"></router-view>
+    <router-view v-loading="loading" style="position: relative;top:110px;left: 395px;" :style="'width:' + bodyWidth + '%'"></router-view>
   </div>
 </template>
 <script>
@@ -48,5 +48,17 @@
   }
 </script>
 <style lang="scss" type=text/scss scope>
-
+.root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .rootHeader {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:1000;
+    height:70px;
+  }
+}
 </style>

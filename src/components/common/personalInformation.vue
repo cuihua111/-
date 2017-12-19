@@ -14,11 +14,11 @@
           <li>静态收益: <span v-text=staticIncome></span></li>
           <li>动态收益:  <span v-text=dynamicIncome></span></li>
           <li>跨港宝: <span v-text=kgb></span>个</li>
-          <li style="margin: 50px 0 0 35px;">
-            <el-button @click="goRecharge()" type="success">充值</el-button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <el-button @click="goWithdrawals()" type="warning">提现</el-button>
-          </li>
         </ul>
+        <div style="text-align: center;">
+          <el-button style="margin-right: 25px;" @click="goRecharge()" type="success">充值</el-button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-button style="margin-left: 25px;" @click="goWithdrawals()" type="warning">提现</el-button>
+        </div>
       </div>
     </div>
 </template>
@@ -48,50 +48,63 @@
 </script>
 <style lang=scss  type=text/scss>
   .slefInfoLeft {
-    width:250px;
+    width:342px;
     .slefInfoLeft-top {
-      width: 250px;
-      height: 300px;
-      border: 2px solid #ccc;
+      width: 342px;
+      height: 360px;
       border-radius: 4px;
-      background-color: #e7e7e7;
+      background-color: #282f35;
+      box-shadow: 3px 3px 5px 5px #323d4d;
       .title {
         font-weight: 700;
         font-size: 14px;
-        margin: 10px 0 10px 10px;
+        height: 65px;
+        color: white;
+        background-color: #21252a;
+        line-height:65px;
+        padding-left:35px;
+      }
+      p{
+        color: #00d2ff;
       }
       .accountBox {
         text-align: center;
+        margin-top:35px;
         margin-bottom:30px;
         .account {
-          width: 80px;
-          height: 80px;
+          width: 120px;
+          height: 120px;
           border: 3px solid #ccc;
           border-radius: 50%;
         }
       }
-      .memberId {
-        padding: 10px 0 20px 10px;
-      }
-      .phoneBind {
-        margin:10px 0 10px 10px;
+      .memberId,.phoneBind {
+        padding: 10px 0 10px 10px;
+        text-align: center;
       }
     }
     .slefInfoLeft-btm {
-      width: 250px;
-      border: 2px solid #ccc;
+      width: 342px;
+      height:425px;
       border-radius: 4px;
-      background-color: #e7e7e7;
+      background-color: #282f35;
+      box-shadow: 3px 3px 5px 5px #323d4d;
       margin-top:40px;
-      padding-bottom:100px;
       .title {
         font-weight: 700;
         font-size: 14px;
-        margin: 10px 0 10px 10px;
+        color: white;
+        height:65px;
+        line-height: 65px;
+        padding-left:35px;
+        background-color: #21252a;
       }
       ul {
+        padding-top: 40px;
         li {
-          margin: 15px 0 15px 10px;
+          height:45px;
+          margin-left: 35px;
+          color: #00d2ff;
         }
       }
     }

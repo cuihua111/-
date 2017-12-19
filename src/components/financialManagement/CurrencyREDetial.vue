@@ -31,7 +31,7 @@
           <template>
             <el-select v-model="value" placeholder="请选择币种" style="display: inline-block">
               <el-option
-                v-for="item in options"
+                v-for="item in coinType"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -95,22 +95,23 @@
             source: '收益',
             date: '2016-05-03'
           }],
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        coinType: [
+          {
+            value: '0',
+            label: '全部'
+          },
+          {
+            value: '1',
+            label: 'SK币'
+          },
+          {
+            value: '2',
+            label: 'TK币'
+          },
+          {
+            value: '3',
+            label: '跨港宝'
+          }],
         value: ''
       }
     },
@@ -127,7 +128,7 @@
     }
   }
 </script>
-<style lang=scss     type=text/scss     scope>
+<style lang=scss        type=text/scss        scope>
   .el-table {
     margin-top: 40px;
     .el-table__body-wrapper {
@@ -135,7 +136,8 @@
       overflow-y: auto;
     }
   }
+
   .el-row {
-    line-height:40px;
+    line-height: 40px;
   }
 </style>
